@@ -33,7 +33,7 @@ module MNE
       #   :help_block => String - Add help sub-text to the field
       %w(text_field phone_field password_field email_field number_field file_field text_area select collection_select date_select datetime_select).each do |method_name|
         define_method method_name.to_sym do |field, *args|
-
+          
           # find the options hash, and extract the options for the label tag
           opts = extract_options(args)
 
@@ -111,7 +111,7 @@ module MNE
       protected
 
       def extract_options(args)
-        args.find { |a| a.is_a?(Hash) } || {}
+        args.find { |a| a.is_a?(Hash) && a.has_key?(:label)} || {}
       end
 
       # Build a label tag (or return false, or "") based on the rules for passing
