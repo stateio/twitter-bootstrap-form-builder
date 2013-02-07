@@ -19,3 +19,18 @@ module MNE
   end
 end
 
+module ApplicationHelper
+  def bootstrap_form_for (record, options = {}, &proc)
+    options[:builder] ||= MNE::TwitterBootstrapFormBuilder::FormBuilder
+    options[:html] ||= {}
+    options[:html][:class] ||= ""
+
+    if !options[:html][:class].match(/form-(horizontal|vertical)/)
+      options[:html][:class] = ["form-horizontal", options[:html][:class]].join(" ")
+    end
+
+    form_for(record, options, &proc)
+  end
+
+end
+
